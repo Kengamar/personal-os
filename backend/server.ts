@@ -10,18 +10,8 @@ import mediaRoutes       from './routes/media'
 const app  = express()
 const PORT = process.env.PORT || 3001
 
-const ALLOWED_ORIGINS = [
-  /^http:\/\/localhost:\d+$/,
-  /^https:\/\/.*\.onrender\.com$/,
-  /^https:\/\/.*\.vercel\.app$/,
-]
-
 app.use(cors({
-  origin: (origin, cb) => {
-    if (!origin) return cb(null, true)
-    const allowed = ALLOWED_ORIGINS.some(p => p.test(origin))
-    cb(allowed ? null : new Error('Not allowed by CORS'), allowed)
-  },
+  origin: ['https://personal-os1.vercel.app', 'http://localhost:5173'],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
